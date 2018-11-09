@@ -60,16 +60,16 @@ def imageBuild(containerName, tag){
 }
 
 def pushToImage(containerName, tag, dockerUser, dockerPassword){
-#    sh "docker login -u $dockerUser -p $dockerPassword"
-#    sh "docker tag $containerName:$tag $dockerUser/$containerName:$tag"
-#    sh "docker tag $containerName:$tag dev2.ehoster.net:5000/$containerName:$tag"
-#    sh "docker push $dockerUser/$containerName:$tag"
+//   sh "docker login -u $dockerUser -p $dockerPassword"
+//   sh "docker tag $containerName:$tag $dockerUser/$containerName:$tag"
+   sh "docker tag $containerName:$tag dev2.ehoster.net:5000/$containerName:$tag"
+//  sh "docker push $dockerUser/$containerName:$tag"
     sh "docker push dev2.ehoster.net:5000/$containerName:$tag"
     echo "Image push complete"
 }
 
 def runApp(containerName, tag, dockerHubUser, httpPort){
-#    sh "docker pull $dockerHubUser/$containerName"
+//   sh "docker pull $dockerHubUser/$containerName"
     sh "docker pull dev2.ehoster.net:5000/$containerName"
     sh "docker run -d --rm -p $httpPort:$httpPort --name $containerName dev2.ehoster.net:5000/$containerName:$tag"
     echo "Application started on port: ${httpPort} (http)"
